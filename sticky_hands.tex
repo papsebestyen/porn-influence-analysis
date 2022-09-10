@@ -1,0 +1,310 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[magyar]{babel}
+\usepackage[outer=25mm,inner=25mm,top=25mm,bottom=25mm]{geometry}
+
+\linespread{1.5}
+\frenchspacing
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\usepackage{indentfirst}
+\usepackage{colortbl}
+\usepackage[capposition=bottom]{floatrow}
+%\usepackage{natbib}
+\usepackage[nottoc]{tocbibind}
+%sajat
+\usepackage{hhline}
+\usepackage{colortbl}
+
+%HIVATKOZAS
+\usepackage[nottoc]{tocbibind}
+\usepackage{natbib}
+\setcitestyle{agms}
+
+% HIVATKOZASOK SZINE
+\usepackage[colorlinks=true]{hyperref}
+\definecolor{oxfordblue}{rgb}{0.0, 0.13, 0.28}
+\hypersetup{
+     colorlinks=true,
+     linkcolor=black,
+     filecolor=blue,
+     citecolor = oxfordblue,      
+     urlcolor=cyan,
+     }
+\pagebreak
+
+% MATEMATIKAI
+\usepackage{amssymb}
+
+%sajat+
+%\setlength\parskip{1\baselineskip}
+
+\usepackage{pgf}
+
+\begin{document}
+
+% \setcounter{page}{1}
+% \setcounter{tocdepth}{3}
+
+\begin{figure}[h]
+\includegraphics[width=50mm]{figures/rajk_green.png}
+\end{figure}
+
+\noindent\rule{\textwidth}{1pt}
+\vspace{1mm}
+\begin{center}
+{\Huge \textbf{Ragadós kezek}}
+
+{\large A pornográfia és a szexuális viselkedés\\
+kapcsolatának vizsgálata}
+\end{center}
+\noindent\rule{\textwidth}{1pt}
+
+\begin{center}
+{\large Készítette: Pap Sebestyén}\\
+{\large Kurzus: Szexuálpszichológia - 2021 ősz}\\
+{\large Kurzustartó: Váradi Fanni}
+\end{center}
+
+\vspace{10mm}
+
+\noindent \textbf{Absztrakt:} A pornográfia egyre inkább meghatározza az internet használati szokásaink, melynek hatása így fontosabb kérdéssé válik. Ez a kutatás azt vizsgálja, hogy milyen kapcsolat található az amerikai társadalomban a PornHub weboldalon található pornográf tartalmak nézettségi adatai, valamint a megfigyelhető szexuális viselkedés között. Az eredmények rávilágítanak, hogy a pornográf videók nézettsége fordított kapcsolatban van az óvszerhasználattal, valamint a hardcore videók nézettségének aránya összefügg a munkahelyi szexuális zaklatásokkal. További eredményként a tanulmány bemutatja, hogy a pornóipar nem követi a társadalomban megfigyelhető szexuális orientációk arányát. Az elemzéshez a dolgozat egy becslést alkalmaz a nézettségre, valamint egyszerű vizualizációs technikákat használ a kapcsolatok feltárására. A vizsgált témák további egyén szintű elemzésével számszerűsíthetőek a kimutatott kapcsolatok.
+
+\thispagestyle{empty}
+
+\pagebreak
+
+\tableofcontents
+
+\thispagestyle{empty}
+
+\pagebreak
+\setcounter{page}{1}
+% \setcounter{tocdepth}{3}
+\listoffigures
+%\listoftables
+
+%\thispagestyle{empty}
+
+\pagebreak
+
+\setcounter{tocdepth}{2}
+% \setcounter{page}{1}
+
+\section{Bevezetés}
+
+A 21. században a föld lakosságának jelentős része rendelkezik már internet kapcsolattal. Az ezen keresztül tapasztalható információ áramlásnak azonban jelentős hányada a pornográf tartalmak fogyasztására irányul. Ez a nagy mértékű erotikus tartalom fogyasztás egyértelműen befolyásoló erővel bír az egyénekre nézve. Ugyanakkor nem egyértelmű, hogy a pornográf tartalmak határozzák-e meg a valós attitűdöket, vagy pedig a kapcsolat fordított irányú és a pornóipar a szexuális attitűdöket követi.
+
+Ebben a dolgozatban a PornHub oldalon tapasztalható amerikai fogyasztási adatok és a társadalomban megfigyelhető jelenségek közötti kapcsolatokat fogom vizsgálni. Kutatási kérdésem az, hogy milyen folyamatokra van hatással a pornográf tartalmak fogyasztása, és ezek a hatásmechanizmusok milyen irányt mutatnak.
+
+A dolgozat arra a következtetésre jut, hogy a pornográf videók erősen összefüggenek az óvszerhasználattal, valamint a szexuális zaklatással is. Ezen túlmenően azonban a nézettség nem követi a lakosság valódi tulajdonságait, így például a homoszexualitás arányát sem.
+
+A kutatási kérdés megválaszolásához a tanulmány egy becslést végez az éves szinten tapasztalható nézettségi adatokra vonatkozóan, majd azokat felhasználva vizualizációs technikák segítségével hasonlítja össze a pornográf tartalom fogyasztását a társadalmi jellemzőkkel.
+
+A dolgozat első fejezete bemutatja röviden a pornográfia különböző definícióit és történetét, majd pedig a második fejezetben kitér a pornográfia egyénekre gyakorolt hatására is. Ezen hatások bemutatásánál a dolgozat elkülöníti a két nemnél megfigyelhető jelenségeket, valamint azokat is, amelyek közösek. A tanulmány harmadik fejezet bemutatja a nézettségi adatok becslésének lépéseit, majd pedig ezeket felhasználva elemzi azok társadalomra gyakorolt hatását. 
+
+Az utolsó összegző fejezetben a dolgozat értékeli az eredményeket is rávilágít azok fontosságára is. Emellett kiemeli az elemzés limitációit is, amelyek további kutatások szükségességére engednek következtetni.
+
+Az adatokon elvégzett műveleteket és az elemzést a Python programnyelv segítségével végeztem el.\footnote{Az elemzéshez felhasznált adatok és scriptek elérhetőek a következő linken https://github.com/papsebestyen/porn-influence-analysis.git}
+
+\section{A pornográfia fogalma és története}
+
+A 19. században a fényképezés, majd a mozgókép találmányait gyorsan kamatoztatták a pornográfia készítésében. A pornográf filmek legkésőbb az 1920-as években széles körben elérhetővé váltak, és az 1960-as években népszerűségük hatalmas felfutásnak indult. A videokazetták kifejlesztése az 1980-as években, a DVD-k elterjedése pedig az 1990-es években lehetővé tette a pornográf filmek széles körű elterjedését. A pornográf képek és filmek még szélesebb körben elérhetővé váltak az internet megjelenésével az 1990-es években. A pornóipar az egyik legjövedelmezőbb iparág lett az interneten. \citep{jenkins2021_pornograpy}
+
+Amellett, hogy hatalmas piacteret biztosít a sokféle ízlésnek a kereskedelmi pornográfia számára, az internet sok amatőrt is arra ösztönzött, hogy tegyen közzé képeket magáról, amelyek gyakran megkérdőjelezték a szépségről és a szexuális vonzerőről alkotott hagyományos elképzeléseket. A webkamerák használata még tovább nyitotta az ipart az amatőrök előtt, lehetővé téve az egyének számára, hogy élőben ábrázolják magukat, gyakran térítés ellenében. \citep{jenkins2021_pornograpy}
+
+A pornográfiában jellemzően heteroszexuális tartalmak keletkeznek, annak ellenére, hogy keresleti oldalon ugyanúgy igény mutatkozik a homoszexuális tartalmakra is. Az iparágban főként férfi heteroszexuális színészek dolgoznak, így elég nagy a kereslet a meleg pornószínészekre. Ebből fakadóan megjelent a \textit{fizetett meleg} (\textit{gay-for-pay}) fogalma is, ami olyan színészeket takar, akik heteroszexuálisok, de pénzért homoszexuális szerepeket vállalnak \citep{kiss2019understanding}. Ez nem is meglepő, hiszen a homoszexuális tartalmakért magasabb fizetést kaphat egy pornószínész \citep{escoffier2003gay}.
+
+A pornográf tartalmak vizsgálatakor fontos a fogalom alapos tisztázása, hisz annak számtalan definíciója létezik. A Pornográfiai Bizottság \citeyearpar[228–229. o.]{united1986attorney} szerint a pornográf tartalom elsősorban szexuális jellegű, és szexuális izgalom céljára készült. Ugyanakkor az internet és a média elérhetőségének növekedésével a pornográf tartalmak definíciója is változott. Például Barron és Kimmel \citeyearpar{barron2000sexual} a pornográfiát úgy definiálja, mint minden olyan szexuális tartalmú anyagot, amely felnőtt használatra van korlátozva. Fontos belátni azonban, hogy ezen korlátok betartatása nem feltétlenül tud megvalósulni az online pornográfia világában.
+
+A pornográfia meghatározásába mások a pornográf tartalmak konkrét megvalósulását is beleveszik. Így például Russel \citeyearpar{russell1993against} úgy határozza meg a pornográfiát, mint olyan médiatartalmat, amely a szexet és a nemiszervek ábrázolását bántalmazással vagy lealacsonyítással kombinálja oly módon, hogy az támogatja, elnézi vagy akár ösztönzi is az ilyen típusú viselkedést. Senn \citeyearpar{senn1993women} pedig megkülönbözteti a pornográfiát az erotikától. Véleménye szerint az erotika szexuális jellegű, de nem lealacsonyító vagy erőszakos, míg a pornográfia a szexualitást összeköti a szexizmussal, rasszizmussal, homofóbiával és erőszakkal is.
+
+\section{A pornográfia hatása}
+
+A pornográfia már széles körben elterjedt és ez a folyamat egyre inkább csak növekszik. Ugyanakkor ezzel párhuzamosan megjelentek azok a vélemények is, amelyek aggodalmukat fejezik ki a termék fogyasztásának hatásaival kapcsolatban. Ez a fajta nyugtalanság azonban nem csak a pornográf, de a nyíltan szexuális tartalmú médiatermékekre is átterjedt, így a televízió, a női és férfi magazinok, valamint az internet mind részét képezik az ezzel kapcsolatos kutatásoknak, melyek szintén számos negatív hatással lehetnek a szexualitásra. \citep{attwood2005people}
+
+Az emberek szexuális viselkedését leginkább az határozza meg, hogy milyen szexuális forgatókönyvekkel találkoznak. A szexuális forgatókönyvek olyan társadalmilag felépített ötletek vagy iránymutatások, amelyek azzal foglalkoznak, hogy hogyan bontakozik ki a szex és milyen következményekkel járhat. Egy szexuális médiaszocializáció modell, a szexuális forgatókönyv-szerzési, aktiválási, alkalmazási modellje ($_3$AM) azt sugallja, hogy a pornográfiának való nagyobb kitettség bizonyos szexuális viselkedések nagyobb valószínűségét eredményezheti, beleértve a kockázattal járó szexuális viselkedéseket is. \citep{gagnon2017sexual, wright2011mass}
+
+Habár számos eszköz rendelkezésre áll a biztonságos együttléthez, de a legkönnyebben elérhető és leggyakrabban használt az óvszer alkalmazása. Ugyanakkor a pornográf tartalmakban gyakran előforduló motívum az, hogy az aktusban résztvevő felek nem gondoskodnak a biztonságos szexről, valamint az esetleges terhesség megelőzéséről, vagy ezek jelenlétére semmi sem utal.  Ez komoly problémát jelenthet, hisz a védekezés hiányának nem csak a tinédzser szülőség lehet a következménye, hanem a szexuális úton terjedő betegségek terjedését is magával vonzhatja. Ezt támasztja alá Wright és társainak \citeyearpar{wright2020adolescent} kutatása, melyben azt figyelték meg, hogy nagyobb eséllyel történik együttlét óvszer nélkül azoknál a fiataloknál, akikkel a szüleik keveset vagy egyáltalán nem beszélgettek a szexuális egészségről.
+
+A pornográfiában megjelenő motívumok sok esetben az egyének valódi szexuális életébe is beleolvadhatnak. Herbenick és társai \citeyearpar{herbenick2020diverse} arra mutatnak rá, hogy a pornográf tartalom fogyasztása mindkét nemnél növeli az olyan agresszív és megalázó attitűdök előfordulását, mint a fojtogatás, a degradáló nevek használata vagy a nem kívánt tevékenységek kikényszerítése. A jelenségre különös figyelmet kell fordítani, hiszen növeli a szexuális együttlétek kockázatát, valamint hatással lehet a szexuális kielégülés folyamataira is.
+
+A pornográf tartalmak fogyasztása habár egyértelmű hatással van az egyénre, ugyanakkor fontos belátni, hogy ez különböző mértékeket és formákat ölthet a férfiak és a nők esetén. Ez nem is meglepő, hiszen mind az online, mind pedig az offline pornográf tartalmak alapvetően a férfi fogyasztókat célozzák \citep{boies2002university}.
+
+A pornográf tartalmak egy jelentős hányadában olyan jelenetek is szerepelnek, amelyekben a férfiak erőszakosan és megalázóan viselkednek nőkkel. Ezek a tartalmak ugyanakkor jelentős változásokat okozhatnak a férfiak szexualitásában és összefügghetnek a szexuális erőszak és agresszió előfordulásával. Malamuth és társai \citeyearpar{malamuth2000pornography} például arra mutattak rá, hogy az erőszakos pornográf tartalmak fogyasztása erősen összefügg a szexuális agresszióval. Tanulmányuk szerint az agresszívabb férfiak szexualitására sokkal károsabb hatással van a pornográf tartalmak ezen műfaja, mint azokra a férfiakra, akik általánosságban kevésbé agresszívek.
+
+Habár a pornográf tartalom fogyasztás nőkre gyakorolt hatásánál vizsgálata sokáig nem volt kutatott téma \citep{weinberg2010pornography}, de számos tanulmány igazolja, hogy nők fogyasztanak erotikus tartalmakat \citep{sabina2008nature}.
+
+A nők esetén kevésbé jellemző az agresszív és káros viselkedésminták átvétele a pornográfiából \citep{bridges2016sexual}, de hatással lehet a szexuális aktivitásukra és annak formájára. Wright \citeyearpar{wright2013internet} tanulmánya például arra mutatott rá, hogy a pornográf tartalmak fogyasztása növeli a házasságon kívüli szexuális együttlétek számát.
+
+\section{Adatok}
+
+A pornográf tartalmakra vonatkozó adatot a pornhub.com oldalról gyűjtöttem be a Python programnyelv segítségével \citep{pornhub2021}.\footnote{A letöltést segítő kódrészletek a következő linken érhetők el: https://github.com/papsebestyen/pornstar\_data} A PornHub weboldal használata azért volt indokolt, mivel az az online pornográfia legnagyobb szereplője az online pornográfia megjelenésétől kezdve.
+
+A letöltött adat közel 3,5 millió videóra vonatkozó információt tartalmazott a 2007 és 2021 között. Ahogy az \ref{video.all.series}. ábra is mutatja, az idő során a PornHub oldalára egyre több és több tartalom került fel, melyek mindegyike ingyenesen elérhető az interneten. Az diagram alapján az is megfigyelhető, hogy a nézettség is folyamatosan egyre nagyobb lett az időben. Fontos figyelembe venni, hogy nézettség a weboldal 2021-es időpontjában lett mérve, tehát minden megtekintést összegez eddig az időpontig. A későbbiekben ennek feloldásaként a dolgozat részletezi az egyes évekhez tartozó nézettsége kiszámítását is.
+
+\begin{figure}[h]
+    \caption[A pornográf videók száma és nézettsége 2021-ben]{\footnotesize{A PornHub weboldalon megjelenő videók száma és nézettsége 2021-ben. Forrás: saját ábra}}
+    \label{video.all.series}
+    \begin{center}
+        \input{figures/video_all_series.pgf}
+    \end{center}
+\end{figure}
+
+Mivel a dolgozatomban szükséges a bizonyos kategóriába tartozó videók vizsgálata is, ezért megfigyeltem az amatőr, a homoszexuális és a hardcore kategóriába tartozó videók adatait is (\ref{video.cat.series}. ábra). Látszódik, hogy az amatőr kategóriában jóval több tartalom került feltöltésre, mint a másik két kategóriában. Ugyanakkor mindegyik kategóriáról elmondható, hogy igazán csak 2016-ot követően nőtt meg az adott kategóriába tartozó videók száma.
+
+\begin{figure}[h]
+    \caption[A pornográf videók száma kategóriánkként]{\footnotesize{A PornHub weboldalon megjelenő videók száma kategóriánkként. Forrás: saját ábra}}
+    \label{video.cat.series}
+    \begin{center}
+        \input{figures/video_cat_series.pgf}
+    \end{center}
+\end{figure}
+
+Ahhoz, hogy mérni tudjam a tényleges tartalomfogyasztást a PornHub oldalán, letöltöttem a semrush.com weboldal segítségével az oldal szerverére érkező kéréseket havi bontásban \citep{semrush_2021}. Ez azt jelenti, hogy az egyes hónapokban hány alkalommal nyitottak meg aloldalakat a weblapon, így jó mérőszám lehet a tartalom tényleges fogyasztására vonatkozóan. 
+A nézettség fajlagosításához felhasználtam az amerikai népességi adatokat is \citep{fred_2021}.
+
+\pagebreak
+Mivel a kutatásomban az amerikai lakosság fogyasztására volt szükségem, ezért beszereztem az Amerikából érkező kéréseket is. Ahogy a \ref{traffic.series}. ábra is jól mutatja, az amerikai fogyasztók jelentős részét kitették az oldal teljes látogatottságának.
+
+\begin{figure}[h]
+    \caption[A PornHub forgalma]{\footnotesize{A PornHub weboldalon tapasztalható forgalom. Forrás: saját ábra}}
+    \label{traffic.series}
+    \begin{center}
+        \input{figures/traffic_series.pgf}
+    \end{center}
+\end{figure}
+
+A társadalomra jellemző folyamatok megismeréséhez a General Social Survey adatait használtam fel \citep{gss_2021}. Ez egy olyan amerikai kérdőív, amely lehetővé teszi az országban megfigyelhető jelenségek mérését, valamint reprezentatív a teljes lakosságra nézve. A kérdőív adatait az elemzésben aggregált formában, nemenként külön-külön ábrázoltam, mivel így válik összehasonlíthatóvá a nézettségi adatokkal.
+
+\section{Nézettség becslése}
+
+Mivel a PornHub weboldalról származó nézettségi adatok a 2021 decemberi időpontra vonatkoznak, ezért az egyes időszakokban nem értelmezhetőek a videók nézettségi adatai. Emiatt az elemzésem során a forgalmi adatokból megbecsültem minden videó nézettségét minden egyes időpontra. Ebben a fejezetben ennek a folyamatnak a lépéseit fogom bemutatni.
+
+A forgalmi adatok sajnos csak 2012-től voltak elérhetőek, ezért az első pornográf videó megjelenésétől, vagyis 2017-től kezdve az első adatpontig, tehát 2012-ig megbecsültem a forgalmi adatokat. Azt feltételeztem, hogy ebben az időszakban még nem volt annyira népszerű az oldal, ezért a hiányzó forgalmi adatokat egy számtani sorozattal egészítettem ki a következőképpen:
+
+$$view_t = \frac{view_T}{missing + 1} (1 + t)$$
+\\
+\noindent ahol a $view_t$ a forgalmi adat a $t$ időpontban, a $view_T$ a forgalmi adat az első meglévő időpontban és a $missing$ a hiányzó adatpontok száma. Az így kapott imputált adatokban az első időpontban sem lesz nulla a forgalom mértéke, valamint az utolsó imputált adatpont nem lesz egyenlő az első valós adatponttal.
+
+Ezt követően kiszámoltam minden egyes időpontra, hogy az adott időponttól kezdve a mai időpontig összesen mennyi forgalom volt megfigyelhető. Ezt a következőképp tettem meg:
+
+$$cum\_traffic_t = \sum_{s = t}^{2021} traffic_s$$
+\\
+\noindent ahol a $cum\_traffic$ a kumulált forgalom $t$ időpontra vonatkozóan, a $traffic$ egy adott évben mért forgalom és a $t$ a vizsgált időpont.
+
+Könnyen belátható, hogy ezzel a módszerrel egyszerűen megállapítható egy videó nézettsége egy adott évben, mivel a 2021-es nézettségi adat a videó kiadásának időpontjától 2021-ig eltelt forgalomból származik. Ennek megfelelően egy adott videó adott évi nézettsége a következőképp számolható ki:
+
+$$view_{s,t} = \frac{view_{s, 2021}}{cum\_traffic_p} traffic_t$$
+\\
+ahol a $view$ az $s$ videó nézettsége $t$ időpontban, a $cum\_traffic_p$ a kumulált forgalom az $s$ videó kiadásának évében és a $traffic$ pedig egy adott évben mért forgalom.
+
+Mivel a General Social Survey kérdőív az amerikai lakosságon lett felmérve, ezért, ha a fenti képletet a teljes forgalom ($traffic$) helyett az amerikai forgalommal szorzom fel, akkor megkapom egy adott videó adott évi amerikai nézettségének értékét. Ez a becsülés pedig már alkalmas lehet a pornográfia hatásának aggregált vizsgálatára.
+
+\section{Elemzés}
+
+Mivel a videó és a forgalom adatok aggregált formában és havonta állnak rendelkezésre, ezért ökonometriai modell és egyén szintű elemzés nem végezhető el rajtuk. Ugyanakkor egyszerű vizualizációs technikával érdekes összefüggésekre lehet rávilágítani, amelyek egy későbbi elemzés alapját is képezhetik. Fontos megemlítenem, hogy a szimpla vizualizációs forma nem alkalmas oksági kapcsolatok mérésére, csupán korreláció és együtt mozgás kimutatására alkalmas. 
+
+Ebben a fejezetben a továbbiakban három különböző szempontból fogom vizsgálni a társadalom és a pornográf videók kapcsolatát.
+
+\subsection{A pornográfia és az óvszerhasználat kapcsolata}
+
+Ahogy a szakirodalom is rávilágít, a pornográfiának nagy hatása van az óvszerhasználatra. A \ref{condom.view}. ábrán az látható, hogy míg férfiak körében kevésbé csökkent az óvszerhasználat, addig a nők esetén gyenge csökkenés volt tapasztalható. A 2021-es évre azonban mindkét nemnél csökkenés volt megfigyelhető.
+
+Ezzel egyúttal az ezer főre jutó pornográf videó nézettség folyamatosan növekedett, valamint 2021-ben ugrásszerű megnőtt. Elmondható, hogy a videók nézettsége fordítottan arányos volt az óvszerhasználattal, de ez leginkább csak a 2021-es évre volt igaz. Az ábrán látható eredmények megfelelnek a szakirodalomból vett elvárásokkal.
+
+\begin{figure}[h]
+    \caption[Nézettség és óvszerhasználat]{\footnotesize{Az óvszerhasználat és a PornHub videók nézettségének alakulása. Forrás: saját ábra}}
+    \label{condom.view}
+    \begin{center}
+        \input{figures/condom_view.pgf}
+    \end{center}
+\end{figure}
+
+A kutatásomban azt feltételeztem, hogy az amatőr videók jobban hasonlítanak az emberek valódi szexuális viselkedésére, mivel előre nem megszervezett jeleneteket forgatnak le bennük. Ebből fakadóan arra lehetne számítani, hogy ahol magas volt az amatőr videók aránya, ott magasabb volt az óvszerhasználat is.
+
+Az \ref{condom.amateur}. ábra alapján ez az összefüggés azonban nem áll fent, sőt pont az ellenkezője tapasztalható. Ahol magasabb volt az amatőr videók nézettségének aránya, ott alacsonyabb volt az óvszerhasználat. 
+
+A jelenség egy lehetséges magyarázata lehet, hogy az amatőr videók valójában pont a szokatlan és egyedi tapasztalatokat jelenítik meg, amelyekben eleve kevesebben használtak óvszert, de az is lehetséges, hogy az amatőr videók aránya nincs kapcsolatban az óvszerhasználattal és csupán véletlenszerű a megfigyelt összefüggés.
+
+\begin{figure}[h]
+    \caption[Amatőr videók és óvszerhasználat]{\footnotesize{Az óvszerhasználat és az amatőr videók nézettségi arányának alakulása. Forrás: saját ábra}}
+    \label{condom.amateur}
+    \begin{center}
+        \input{figures/condom_amateur.pgf}
+    \end{center}
+\end{figure}
+
+\subsection{A pornográfia és a szexuális erőszak kapcsolata}
+
+Számos kutatás rávilágított, hogy a pornográf tartalmak növelhetik az szexuális agressziót és ebből fakadóan a szexuális zaklatásokra is nagy hatással lehetnek. Az elemzésben azt feltételeztem, hogy a hardcore pornográf videók erre különösen nagy erővel hatnak, mivel ezekben a tartalmakban kifejezetten erőszakos jelenetek szerepelnek.
+
+A \ref{harrasment.hardcore}. ábrán az látható, hogy a munkahelyi szexuális zaklatás aránya habár a nőknél csökkent 5\%-ról 4\%-ra, de a férfiak esetén 2018-ban ugrásszerűen megnövekedett 1\%-ról 03\%-ra. Ezzel egyidőben a hardcore tartalmak nézettségének aránya a PornHub weboldal működésének kezdetén, valamint a végén volt nagyobb mértékű.
+
+Az ábra alapján a két változó kapcsolata fordított, ami megfelel az előzetes várakozásoknak, valamint a szakirodalom álláspontjának is.
+
+\begin{figure}[h]
+    \caption[Hardcore videók és szexuális zaklatás]{\footnotesize{A szexuális zaklatás és a hardcore videók nézettségi arányának alakulása. Forrás: saját ábra}}
+    \label{harrasment.hardcore}
+    \begin{center}
+        \input{figures/harrasment_hardcore.pgf}
+    \end{center}
+\end{figure}
+
+\subsection{A pornográfia és a szexuális orientáció kapcsolata}
+
+A szexuális orientáció és pornográf tartalmak kapcsolata némiképp eltér az eddig vizsgált összefüggésektől. A szexuális orientáció nem egy külső hatásokból internalizált tulajdonság, hanem annál jóval korábban kialakulhat. Ennek megfelelően a pornográfia véleményem szerint nincs hatással a szexuális orientációra. Ugyanakkor a pornográfia, mint iparág függ a szexuális orientációtól, mivel az iparágnak célja a fogyasztók minél széleskörűbb kielégítése.
+
+A \ref{homosexuality.homosexual}. ábrán azt lehet megfigyelni, hogy a homoszexualitás aránya a nőknél évről évre növekedett, a férfiak esetében pedig ez szintén igaz 2018 kivételével, ahol ez az arány erőteljesen lecsökkent. A homoszexuális tartalmak nézettségének aránya ezalatt 2012-ig folyamatosan növekedett körülbelül 12,5\%-ra, majd csökkenni kezdett és 2021-re csupán 7,5\%-ra esett vissza.
+
+Az ábra alapján a két változó közötti kapcsolat nem egyértelmű. A homoszexuális tartalmak fogyasztása visszaesik, ami annak lehet is a következménye, hogy a homoszexuális fogyasztók más oldalakra látogatnak a hasonló tartalmak után keresve, de az is lehet, hogy csupán lecsökkent a pornográf tartalom iránti keresletük, kevesebb ilyen terméket akarnak fogyasztani. Az ábráról azonban elmondható, hogy a pornóiparban megjelenő kereslet nem követi a fogyasztók valós szexuális orientációját.
+
+\begin{figure}[h]
+    \caption[Homoszexuális videók és homoszexualitás]{\footnotesize{A homoszexualitás és a homoszexuális videók nézettségi arányának alakulása. Forrás: saját ábra}}
+    \label{homosexuality.homosexual}
+    \begin{center}
+        \input{figures/homosexuality_homosexual.pgf}
+    \end{center}
+\end{figure}
+
+\section{Összegzés}
+
+A dolgozatom kutatási kérdése az volt, hogy milyen összefüggés tapasztalható Amerikában a pornográf tartalmak fogyasztása, valamint a lakosságon megfigyelhető különböző jelenségek között.
+
+Az elemzésben arra jutottam, hogy az óvszerhasználat fordított kapcsolatban van a pornográf tartalmak iránti kereslettel, tehát minél többen néznek ilyen tartalmakat, annál kevesebben használnak óvszert az együttlét során. Az eredmény megfelel a szakirodalomnak is. Ez az összefüggés szintúgy fordított volt, amikor az amatőr videók fogyasztásának arányát vizsgáltam.
+
+A szexuális zaklatások aránya összefüggött a pornográf tartalmakkal. Ez az arány akkor volt magasabb, amikor a hardcore pornográf videók magasabb arányban voltak fogyasztva, tehát ha a pornográf tartalmak fogyasztói nagyobb részben néztek erőszakos, durva jeleneteket. Ez az eredmény is megfelel a szakirodalomban tárgyaltaknak.
+
+A homoszexualitás aránya és a homoszexuális tartalmak nem voltak egyértelmű kapcsolatban. A dolgozatomban arra következtetek, hogy ennek az az oka, hogy a homoszexuális fogyasztókban lecsökkent a termék iránti kereslet, valamint, hogy a PornHub weboldala nem követi a lakosságban ténylegesen megfigyelhető homoszexualitás mértékét.
+
+A videók és forgalmi adatokból először megbecsültem minden évre az egyes videók nézettségét, majd az elemzés során egyszerű vizualizációs technikákat alkalmaztam, mivel az adatok nem tettek lehetővé az ennél mélyre menőbb módszertanok alkalmazását.
+
+Az alkalmazott módszerek nem alkalmasak oksági kapcsolatok vizsgálatára, csupán különböző jelenségek közötti időbeni kapcsolatot próbálnak meg bemutatni. Továbbá a mért nézettségek és arányok nem veszik figyelembe a mögöttes egyének egyéb tulajdonságait, így például a demográfiai és a szexuális életre vonatkozó jellemzőket sem.
+
+A pornográfia hatásának vizsgálata fontos téma, hiszen az egyre több ilyen tartalmat fogyasztanak az emberek, ami egyértelmű hatással van rájuk. Továbbá egyre hamarabb találkoznak a fiatalok ilyen tartalmakkal és ez a még nem kifejlett szexualitásra nagyobb erővel bírhat. A dolgozat rávilágít a vizsgált téma fontosságára, valamint a különböző aggregált tulajdonságok és a pornográfia kapcsolatára, de azok mélyebb megértéséhez egyén szintű elemzésre van szükség, ami a további kutatásoknak is alapját képezheti.
+
+\pagebreak
+\bibliographystyle{apalike2}
+\bibliography{references}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
